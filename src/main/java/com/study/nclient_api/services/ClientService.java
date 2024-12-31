@@ -6,7 +6,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.beans.Transient;
 
 @Service
 public class ClientService {
@@ -38,5 +41,10 @@ public class ClientService {
         BeanUtils.copyProperties(client, entity,"id");
         clientRepository.save(client);
         return entity;
+    }
+
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public void deleteClientById(Long id) {
+        clientRepository.deleteById(id);
     }
 }
