@@ -40,4 +40,12 @@ public class ClientController {
         ClientDTO result = clientMapper.clientToClientDTO(client);
         return ResponseEntity.ok(result);
     }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ClientDTO> updateClient(@PathVariable Long id, @RequestBody ClientDTO clientDTO) {
+        Client client = clientMapper.clientDTOToClient(clientDTO);
+        client = clientService.updateClient(id, client);
+        ClientDTO result = clientMapper.clientToClientDTO(client);
+        return ResponseEntity.ok(result);
+    }
 }

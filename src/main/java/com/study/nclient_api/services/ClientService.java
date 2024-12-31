@@ -2,6 +2,7 @@ package com.study.nclient_api.services;
 
 import com.study.nclient_api.entities.Client;
 import com.study.nclient_api.repositories.ClientRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,13 @@ public class ClientService {
     @Transactional
     public Client insertClient(Client client) {
         return clientRepository.save(client);
+    }
+
+    @Transactional
+    public Client updateClient(Long id, Client client) {
+        Client entity = clientRepository.getReferenceById(id);
+        BeanUtils.copyProperties(client, entity,"id");
+        clientRepository.save(client);
+        return entity;
     }
 }
