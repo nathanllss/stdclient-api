@@ -1,7 +1,12 @@
 package com.study.nclient_api.dto;
 
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
+
 import java.time.LocalDate;
 
+import static org.springframework.data.web.config.EnableSpringDataWebSupport.PageSerializationMode.VIA_DTO;
+
+@EnableSpringDataWebSupport(pageSerializationMode = VIA_DTO)
 public class ClientDTO {
 
     private Long id;

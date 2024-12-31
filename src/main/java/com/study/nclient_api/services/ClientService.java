@@ -2,7 +2,10 @@ package com.study.nclient_api.services;
 
 import com.study.nclient_api.entities.Client;
 import com.study.nclient_api.repositories.ClientRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,8 +18,8 @@ public class ClientService {
         this.clientRepository = clientRepository;
     }
 
-    public List<Client> getAllClients() {
-        List<Client> clients = clientRepository.findAll();
-        return clients;
+    @Transactional(readOnly = true)
+    public Page<Client> getAllClients(Pageable pageable) {
+        return clientRepository.findAll(pageable);
     }
 }
