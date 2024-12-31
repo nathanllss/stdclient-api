@@ -1,4 +1,4 @@
-package com.study.nclient_api.dto;
+package com.study.nclient_api.dto.errors;
 
 import java.time.Instant;
 

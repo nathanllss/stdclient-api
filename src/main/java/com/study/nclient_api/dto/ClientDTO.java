@@ -1,5 +1,7 @@
 package com.study.nclient_api.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
 import java.time.LocalDate;
@@ -10,9 +12,11 @@ import static org.springframework.data.web.config.EnableSpringDataWebSupport.Pag
 public class ClientDTO {
 
     private Long id;
+    @NotBlank(message = "não pode ser vazio")
     private String name;
     private String cpf;
     private Double income;
+    @PastOrPresent(message = "não pode ser data futura")
     private LocalDate birthDate;
     private Integer children;
 

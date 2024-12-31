@@ -4,6 +4,7 @@ import com.study.nclient_api.dto.ClientDTO;
 import com.study.nclient_api.entities.Client;
 import com.study.nclient_api.mappers.ClientMapper;
 import com.study.nclient_api.services.ClientService;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +39,7 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<ClientDTO> insertClient(@RequestBody ClientDTO clientDTO) {
+    public ResponseEntity<ClientDTO> insertClient(@Valid @RequestBody ClientDTO clientDTO) {
         Client client = clientService.insertClient(clientMapper.clientDTOToClient(clientDTO));
         ClientDTO result = clientMapper.clientToClientDTO(client);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(client.getId()).toUri();
@@ -46,7 +47,7 @@ public class ClientController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ClientDTO> updateClient(@PathVariable Long id, @RequestBody ClientDTO clientDTO) {
+    public ResponseEntity<ClientDTO> updateClient(@PathVariable Long id, @Valid @RequestBody ClientDTO clientDTO) {
         Client client = clientMapper.clientDTOToClient(clientDTO);
         client = clientService.updateClient(id, client);
         ClientDTO result = clientMapper.clientToClientDTO(client);
