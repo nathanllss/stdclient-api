@@ -25,4 +25,9 @@ public class ClientService {
     public Client getClientById(Long id) {
         return clientRepository.findById(id).get();
     }
+
+    @Transactional
+    public Client insertClient(Client client) {
+        return clientRepository.save(client);
+    }
 }
